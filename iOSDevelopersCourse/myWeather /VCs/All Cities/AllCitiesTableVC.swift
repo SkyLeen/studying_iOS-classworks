@@ -32,9 +32,6 @@ class AllCitiesTableVC: UITableViewController {
         return cell
      }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-    }
  
 //    @IBAction func addNewItemPressed(_ sender: UIBarButtonItem) {
 //        performSegue(withIdentifier: "addNewItem", sender: nil)

@@ -8,14 +8,14 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class WeatherCollectionVC: UICollectionViewController {
-
+    
+    var titleVC = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        navigationItem.title = titleVC
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -27,18 +27,12 @@ class WeatherCollectionVC: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath)
-        cell.backgroundColor = .yellow
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as! WeatherViewCell
+        
+        cell.weatherLabel.text = "- 15 C"
+        cell.timeLabel.text = "24.02.2018 00:20"
     
         return cell
     }
-
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
 
 }
