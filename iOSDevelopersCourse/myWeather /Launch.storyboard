@@ -17,7 +17,18 @@
                     <view key="view" contentMode="scaleToFill" id="d3y-Yi-ily">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="weather_launch" translatesAutoresizingMaskIntoConstraints="NO" id="TDN-0x-E0y">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90980392156862744" blue="0.99215686274509807" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="TDN-0x-E0y" firstAttribute="top" secondItem="d3y-Yi-ily" secondAttribute="top" id="1ED-D9-ebF"/>
+                            <constraint firstItem="4DC-24-eEk" firstAttribute="trailing" secondItem="TDN-0x-E0y" secondAttribute="trailing" id="2G7-Fg-ug3"/>
+                            <constraint firstItem="4DC-24-eEk" firstAttribute="bottom" secondItem="TDN-0x-E0y" secondAttribute="bottom" id="EBL-x6-GTW"/>
+                            <constraint firstItem="TDN-0x-E0y" firstAttribute="leading" secondItem="4DC-24-eEk" secondAttribute="leading" id="aFg-Pe-aKG"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4DC-24-eEk"/>
                     </view>
                 </viewController>
@@ -26,4 +37,7 @@
             <point key="canvasLocation" x="166" y="145"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="weather_launch" width="334" height="492"/>
+    </resources>
 </document>
