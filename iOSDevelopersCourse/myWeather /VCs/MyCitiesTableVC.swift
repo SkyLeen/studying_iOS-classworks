@@ -24,7 +24,8 @@ class MyCitiesTableVC: UITableViewController {
         let citiesCount = myCitiesArray.count
         return citiesCount
     }
-     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "MyCitiesCell", for: indexPath) as! MyCitiesViewCell
         
          cell.myCityName.text = myCitiesArray[indexPath.row]
@@ -62,7 +63,7 @@ class MyCitiesTableVC: UITableViewController {
         let newCity = allCitiesVC.citiesArray[cellNewCity.row]
         
         guard !myCitiesArray.contains(newCity) else {
-            present(Functions().showAlert(withTitle: "Warning!", message: "There is a such City in the list"), animated: false)
+            present(AlertHelper().showAlert(withTitle: "Warning!", message: "There is a such City in the list"), animated: false)
             return
         }
         myCitiesArray.append(newCity)

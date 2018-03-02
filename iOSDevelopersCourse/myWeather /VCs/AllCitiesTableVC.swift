@@ -20,6 +20,10 @@ class AllCitiesTableVC: UITableViewController {
         let sectionsCount = countriesArray.count
         return sectionsCount
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return countriesArray[section]
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let rowsCount = citiesArray.count
@@ -31,33 +35,4 @@ class AllCitiesTableVC: UITableViewController {
         cell.cityName.text = citiesArray[indexPath.row]
         return cell
      }
-    
- 
-//    @IBAction func addNewItemPressed(_ sender: UIBarButtonItem) {
-//        performSegue(withIdentifier: "addNewItem", sender: nil)
-//    }
-    
-
-
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-
-    /*
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

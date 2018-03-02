@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Functions {
+struct AlertHelper {
     
     func showAlert(withTitle title: String, message: String) -> UIAlertController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
