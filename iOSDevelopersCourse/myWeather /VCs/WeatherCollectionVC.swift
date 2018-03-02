@@ -11,11 +11,14 @@ import UIKit
 class WeatherCollectionVC: UICollectionViewController {
     
     var titleVC = ""
+    let weatherService = WeatherService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = titleVC
+        
+        weatherService.loadWeatherDataFor5Days(for: "Moscow")
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
