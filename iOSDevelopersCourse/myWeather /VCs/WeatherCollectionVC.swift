@@ -18,7 +18,7 @@ class WeatherCollectionVC: UICollectionViewController {
         
         navigationItem.title = titleVC
         
-        weatherService.loadWeatherDataFor5Days(for: "Moscow")
+        weatherService.loadWeatherDataFor5Days(for: titleVC)
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
