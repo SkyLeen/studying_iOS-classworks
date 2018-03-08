@@ -12,13 +12,17 @@ class WeatherCollectionVC: UICollectionViewController {
     
     var titleVC = ""
     let weatherService = WeatherService()
+    var weather = [Weather]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = titleVC
         
-        weatherService.loadWeatherDataFor5Days(for: titleVC)
+        weatherService.loadWeatherDataFor5Days(for: titleVC, completion: { [weak self] weathers in
+            self?.weather = weathers
+            self?.collectionView?.reloadData()
+            })
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -26,14 +30,16 @@ class WeatherCollectionVC: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return weather.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as! WeatherViewCell
-        
-        cell.weatherLabel.text = "- 15 C"
-        cell.timeLabel.text = "24.02.2018 00:20"
+        let weather = self.weather[indexPath.row]
+
+        cell.weatherLabel.text = "\(weather.temp) C, \(weather.description)"
+        cell.timeLabel.text = cell.dateConfigure(with: weather)
+        //cell.iconImage.image = UIImage(named: weather.icon)
     
         return cell
     }

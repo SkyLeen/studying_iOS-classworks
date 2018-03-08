@@ -8,6 +8,7 @@
 
 import Foundation
 import Alamofire
+import SwiftyJSON
 
 class WeatherService {
     let baseUrl = "http://api.openweathermap.org"
@@ -15,7 +16,7 @@ class WeatherService {
     
     var sessionManager = SessionManager()
     
-    func loadWeatherDataFor5Days(for city: String){
+    func loadWeatherDataFor5Days(for city: String, completion: @escaping ([Weather]) -> ()){
         let path = "/data/2.5/forecast"
         let parameters: Parameters = [
             "q":city,
@@ -31,7 +32,8 @@ class WeatherService {
         sessionManager.request(url, method: .get, parameters: parameters).responseJSON { response in
             switch response.result {
             case .success(let value):
-                print(value)
+                let json = JSON(value)["list"].flatMap( { Weather(json: $0.1) } )
+                completion(json)
             case .failure(let error):
                 print(error)
             }
