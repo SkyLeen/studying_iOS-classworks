@@ -1,5 +1,5 @@
 //
-//  MyCitiesViewCell.swift
+//  FavoritiesViewCell.swift
 //  myWeather 
 //
 //  Created by Natalya on 23/02/2018.
@@ -8,19 +8,16 @@
 
 import UIKit
 
-class MyCitiesViewCell: UITableViewCell {
+class AllCitiesViewCell: UITableViewCell {
 
-    @IBOutlet weak var myCityName: UILabel!
+    @IBOutlet weak var cityName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
 }
