@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 class WeatherService {
     let baseUrl = "http://api.openweathermap.org"
@@ -33,10 +34,22 @@ class WeatherService {
             switch response.result {
             case .success(let value):
                 let json = JSON(value)["list"].flatMap( { Weather(json: $0.1) } )
+                self.saveWeatherData(weather: json)
                 completion(json)
             case .failure(let error):
                 print(error)
             }
+        }
+    }
+    
+    func saveWeatherData(weather: [Weather]) {
+        do {
+            let realm = try Realm()
+            realm.beginWrite()
+            realm.add(weather)
+            try realm.commitWrite()
+        } catch {
+            print(error)
         }
     }
 }

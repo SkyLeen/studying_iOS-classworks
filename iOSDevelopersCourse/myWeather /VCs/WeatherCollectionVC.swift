@@ -21,7 +21,9 @@ class WeatherCollectionVC: UICollectionViewController {
         
         weatherService.loadWeatherDataFor5Days(for: titleVC, completion: { [weak self] weathers in
             self?.weather = weathers
-            self?.collectionView?.reloadData()
+            DispatchQueue.main.async {
+                self?.collectionView?.reloadData()
+            }
             })
     }
 

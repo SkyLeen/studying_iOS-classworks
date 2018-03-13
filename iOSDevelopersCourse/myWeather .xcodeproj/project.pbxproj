@@ -62,6 +62,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0490991E2057E220009C784A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				04D2195120518D26001E5B26 /* WeatherModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		04D2193E2049C91B001E5B26 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -78,7 +86,6 @@
 			children = (
 				041631552040ACC100446639 /* AlertHelper.swift */,
 				04D219422049ED7D001E5B26 /* WeatherServices.swift */,
-				04D2195120518D26001E5B26 /* WeatherModel.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -104,6 +111,7 @@
 		04D37E6920381B1100F958AF /* myWeather  */ = {
 			isa = PBXGroup;
 			children = (
+				0490991E2057E220009C784A /* Models */,
 				04D2193F2049C965001E5B26 /* Services */,
 				04D2193E2049C91B001E5B26 /* Cells */,
 				04EEDEF72040516E004106E7 /* VCs */,
@@ -257,11 +265,15 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-myWeather /Pods-myWeather -frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
