@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class WeatherCollectionVC: UICollectionViewController {
     
     var titleVC = ""
     let weatherService = WeatherService()
-    var weather = [Weather]()
+    private var weather = [Weather]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,11 +21,14 @@ class WeatherCollectionVC: UICollectionViewController {
         navigationItem.title = titleVC
         
         weatherService.loadWeatherDataFor5Days(for: titleVC, completion: { [weak self] weathers in
-            self?.weather = weathers
-            DispatchQueue.main.async {
-                self?.collectionView?.reloadData()
+            do {
+                let realm = try Realm()
+                self?.weather = Array(realm.objects(Weather.self))
+            } catch {
+                print(error.localizedDescription)
             }
-            })
+            self?.collectionView?.reloadData()
+        })
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -42,8 +46,6 @@ class WeatherCollectionVC: UICollectionViewController {
         cell.weatherLabel.text = "\(weather.temp) C, \(weather.description)"
         cell.timeLabel.text = cell.dateConfigure(with: weather)
         //cell.iconImage.image = UIImage(named: weather.icon)
-    
         return cell
     }
-
 }

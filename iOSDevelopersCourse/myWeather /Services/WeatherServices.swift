@@ -43,11 +43,15 @@ class WeatherService {
     }
     
     func saveWeatherData(weather: [Weather]) {
+        var configuration = Realm.Configuration()
+        configuration.deleteRealmIfMigrationNeeded = true
+        
         do {
-            let realm = try Realm()
-            realm.beginWrite()
-            realm.add(weather)
-            try realm.commitWrite()
+            let realm = try Realm(configuration: configuration)
+            print(realm.configuration.fileURL ?? "no file")
+            try realm.write {
+                realm.add(weather, update: true)
+            }
         } catch {
             print(error)
         }

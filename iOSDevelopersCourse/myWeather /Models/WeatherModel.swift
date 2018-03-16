@@ -11,6 +11,8 @@ import SwiftyJSON
 import RealmSwift
 
 class Weather: Object {
+    
+    @objc dynamic var id: String = ""
     @objc dynamic var dateTime: Double = 0.0
     @objc dynamic var temp: Double = 0.0
     @objc dynamic var weatherDescription: String = ""
@@ -18,9 +20,14 @@ class Weather: Object {
 
     convenience init(json: JSON) {
         self.init()
-        self.dateTime = json["dt"].doubleValue
-        self.temp = json["main"]["temp"].doubleValue
-        self.icon = json["weather"][0]["icon"].stringValue
-        self.weatherDescription = json["weather"][0]["main"].stringValue
+        id = json["dt"].stringValue
+        dateTime = json["dt"].doubleValue
+        temp = json["main"]["temp"].doubleValue
+        icon = json["weather"][0]["icon"].stringValue
+        weatherDescription = json["weather"][0]["main"].stringValue
+    }
+    
+    @objc override open class func primaryKey() -> String? {
+        return "id"
     }
 }
