@@ -17,14 +17,17 @@ class Weather: Object {
     @objc dynamic var temp: Double = 0.0
     @objc dynamic var weatherDescription: String = ""
     @objc dynamic var icon: String = ""
+    @objc dynamic var city: String = ""
 
-    convenience init(json: JSON) {
+    convenience init(json: JSON, city: String) {
         self.init()
-        id = json["dt"].stringValue
-        dateTime = json["dt"].doubleValue
-        temp = json["main"]["temp"].doubleValue
-        icon = json["weather"][0]["icon"].stringValue
-        weatherDescription = json["weather"][0]["main"].stringValue
+        
+        self.id = json["dt"].stringValue
+        self.dateTime = json["dt"].doubleValue
+        self.temp = json["main"]["temp"].doubleValue
+        self.icon = json["weather"][0]["icon"].stringValue
+        self.weatherDescription = json["weather"][0]["main"].stringValue
+        self.city = city
     }
     
     @objc override open class func primaryKey() -> String? {

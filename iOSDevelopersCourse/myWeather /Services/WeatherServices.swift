@@ -17,7 +17,7 @@ class WeatherService {
     
     var sessionManager = SessionManager()
     
-    func loadWeatherDataFor5Days(for city: String, completion: @escaping ([Weather]) -> ()){
+    func loadWeatherDataFor5Days(for city: String, completion: @escaping () -> ()){
         let path = "/data/2.5/forecast"
         let parameters: Parameters = [
             "q":city,
@@ -33,23 +33,25 @@ class WeatherService {
         sessionManager.request(url, method: .get, parameters: parameters).responseJSON { response in
             switch response.result {
             case .success(let value):
-                let json = JSON(value)["list"].flatMap( { Weather(json: $0.1) } )
-                self.saveWeatherData(weather: json)
-                completion(json)
+                let weather = JSON(value)["list"].flatMap( { Weather(json: $0.1, city: city) } )
+                self.saveWeatherData(weather: weather, city: city)
+                completion()
             case .failure(let error):
                 print(error)
             }
         }
     }
     
-    func saveWeatherData(weather: [Weather]) {
+    func saveWeatherData(weather: [Weather], city: String) {
         var configuration = Realm.Configuration()
         configuration.deleteRealmIfMigrationNeeded = true
         
         do {
             let realm = try Realm(configuration: configuration)
+            let oldWeather = realm.objects(Weather.self).filter("city == %@", city)
             print(realm.configuration.fileURL ?? "no file")
             try realm.write {
+                realm.delete(oldWeather)
                 realm.add(weather, update: true)
             }
         } catch {

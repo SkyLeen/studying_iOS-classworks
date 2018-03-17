@@ -20,15 +20,10 @@ class WeatherCollectionVC: UICollectionViewController {
         
         navigationItem.title = titleVC
         
-        weatherService.loadWeatherDataFor5Days(for: titleVC, completion: { [weak self] weathers in
-            do {
-                let realm = try Realm()
-                self?.weather = Array(realm.objects(Weather.self))
-            } catch {
-                print(error.localizedDescription)
-            }
+        weatherService.loadWeatherDataFor5Days(for: titleVC) { [weak self]  in
+            self?.loadWeatherData(city: (self?.titleVC)!)
             self?.collectionView?.reloadData()
-        })
+        }
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -47,5 +42,14 @@ class WeatherCollectionVC: UICollectionViewController {
         cell.timeLabel.text = cell.dateConfigure(with: weather)
         //cell.iconImage.image = UIImage(named: weather.icon)
         return cell
+    }
+    
+    private func loadWeatherData(city: String) {
+        do {
+            let realm = try Realm()
+            self.weather = Array(realm.objects(Weather.self).filter("city == %@", city))
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
