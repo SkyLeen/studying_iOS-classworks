@@ -16,6 +16,8 @@
 		041631592040B4D800446639 /* WeatherViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041631582040B4D800446639 /* WeatherViewCell.swift */; };
 		0416315B2040C6BB00446639 /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416315A2040C6BB00446639 /* SettingsTableVC.swift */; };
 		0416315E2040C6EC00446639 /* SettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416315D2040C6EC00446639 /* SettingsViewCell.swift */; };
+		0419AD632062594400C8E4B1 /* WeatherRealmSaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419AD622062594400C8E4B1 /* WeatherRealmSaving.swift */; };
+		0419AD6520625A6B00C8E4B1 /* WeatherRealmLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419AD6420625A6B00C8E4B1 /* WeatherRealmLoading.swift */; };
 		04D219432049ED7D001E5B26 /* WeatherServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D219422049ED7D001E5B26 /* WeatherServices.swift */; };
 		04D2195220518D26001E5B26 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2195120518D26001E5B26 /* WeatherModel.swift */; };
 		04D37E6B20381B1100F958AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D37E6A20381B1100F958AF /* AppDelegate.swift */; };
@@ -36,6 +38,8 @@
 		041631582040B4D800446639 /* WeatherViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewCell.swift; sourceTree = "<group>"; };
 		0416315A2040C6BB00446639 /* SettingsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
 		0416315D2040C6EC00446639 /* SettingsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewCell.swift; sourceTree = "<group>"; };
+		0419AD622062594400C8E4B1 /* WeatherRealmSaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRealmSaving.swift; sourceTree = "<group>"; };
+		0419AD6420625A6B00C8E4B1 /* WeatherRealmLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRealmLoading.swift; sourceTree = "<group>"; };
 		04D219422049ED7D001E5B26 /* WeatherServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServices.swift; sourceTree = "<group>"; };
 		04D2195120518D26001E5B26 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		04D37E6720381B1100F958AF /* myWeather .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "myWeather .app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +90,8 @@
 			children = (
 				041631552040ACC100446639 /* AlertHelper.swift */,
 				04D219422049ED7D001E5B26 /* WeatherServices.swift */,
+				0419AD622062594400C8E4B1 /* WeatherRealmSaving.swift */,
+				0419AD6420625A6B00C8E4B1 /* WeatherRealmLoading.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -292,10 +298,12 @@
 				041631522040A42300446639 /* MyCitiesTableVC.swift in Sources */,
 				04D37E6B20381B1100F958AF /* AppDelegate.swift in Sources */,
 				041631562040ACC100446639 /* AlertHelper.swift in Sources */,
+				0419AD632062594400C8E4B1 /* WeatherRealmSaving.swift in Sources */,
 				041631592040B4D800446639 /* WeatherViewCell.swift in Sources */,
 				04D2195220518D26001E5B26 /* WeatherModel.swift in Sources */,
 				0416313E20408C3200446639 /* AllCitiesViewCell.swift in Sources */,
 				0416314C20408F8900446639 /* AllCitiesTableVC.swift in Sources */,
+				0419AD6520625A6B00C8E4B1 /* WeatherRealmLoading.swift in Sources */,
 				0416315E2040C6EC00446639 /* SettingsViewCell.swift in Sources */,
 				0416315B2040C6BB00446639 /* SettingsTableVC.swift in Sources */,
 				04D37E7D2038445C00F958AF /* LoginVC.swift in Sources */,

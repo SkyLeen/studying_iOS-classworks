@@ -6,7 +6,6 @@
 //  Copyright © 2018 Natalya Shikhalyova. All rights reserved.
 //
 
-import Foundation
 import Alamofire
 import SwiftyJSON
 import RealmSwift
@@ -34,7 +33,7 @@ class WeatherService {
             switch response.result {
             case .success(let value):
                 let weather = JSON(value)["list"].flatMap( { Weather(json: $0.1, city: city) } )
-                self.saveWeatherData(weather: weather, city: city)
+                Saver.saveWeatherData(objects: weather, filterFor: city)
                 completion()
             case .failure(let error):
                 print(error)
@@ -42,20 +41,5 @@ class WeatherService {
         }
     }
     
-    func saveWeatherData(weather: [Weather], city: String) {
-        var configuration = Realm.Configuration()
-        configuration.deleteRealmIfMigrationNeeded = true
-        
-        do {
-            let realm = try Realm(configuration: configuration)
-            let oldWeather = realm.objects(Weather.self).filter("city == %@", city)
-            print(realm.configuration.fileURL ?? "no file")
-            try realm.write {
-                realm.delete(oldWeather)
-                realm.add(weather, update: true)
-            }
-        } catch {
-            print(error)
-        }
-    }
+   
 }

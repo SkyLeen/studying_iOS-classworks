@@ -21,7 +21,8 @@ class WeatherCollectionVC: UICollectionViewController {
         navigationItem.title = titleVC
         
         weatherService.loadWeatherDataFor5Days(for: titleVC) { [weak self]  in
-            self?.loadWeatherData(city: (self?.titleVC)!)
+            let weathers = Loader.loadWeatherData(object: Weather()).filter("city == %@", (self?.titleVC)!)
+            self?.weather = Array(weathers)
             self?.collectionView?.reloadData()
         }
     }
@@ -38,18 +39,11 @@ class WeatherCollectionVC: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as! WeatherViewCell
         let weather = self.weather[indexPath.row]
 
-        cell.weatherLabel.text = "\(weather.temp) C, \(weather.description)"
+        cell.weatherLabel.text = "\(weather.temp) C, " + weather.weatherDescription
         cell.timeLabel.text = cell.dateConfigure(with: weather)
         //cell.iconImage.image = UIImage(named: weather.icon)
         return cell
     }
     
-    private func loadWeatherData(city: String) {
-        do {
-            let realm = try Realm()
-            self.weather = Array(realm.objects(Weather.self).filter("city == %@", city))
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
+    
 }
