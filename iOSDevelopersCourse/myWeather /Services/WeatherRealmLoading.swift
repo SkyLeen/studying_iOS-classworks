@@ -10,7 +10,7 @@ import RealmSwift
 
 class Loader {
     
-    static func loadWeatherData<T: Object>(object: T) -> Results<T> {
+    static func loadData<T: Object>(object: T) -> Results<T> {
         var resault: Results<T>?
         do {
             let realm = try Realm()

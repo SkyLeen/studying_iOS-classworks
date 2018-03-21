@@ -13,7 +13,7 @@ class WeatherCollectionVC: UICollectionViewController {
     
     var titleVC = ""
     private lazy var weather: Results<Weather> = {
-      return Loader.loadWeatherData(object: Weather())
+      return Loader.loadData(object: Weather())
     }()
     
     private var token: NotificationToken?
@@ -24,26 +24,9 @@ class WeatherCollectionVC: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.title = titleVC
-        
         WeatherService.loadWeatherDataFor5Days(for: titleVC)
-        
-        token = weather.observe { [weak self] changes in
-            guard let collection = self?.collectionView else { return }
-            switch changes {
-            case .initial:
-                collection.reloadData()
-            case .update(_, let delete, let insert, let update):
-                collection.performBatchUpdates ({
-                    collection.deleteItems(at: delete.map({ IndexPath(row: $0, section: 0) }))
-                    collection.insertItems(at: insert.map({ IndexPath(row: $0, section: 0) }))
-                    collection.reloadItems(at: update.map({ IndexPath(row: $0, section: 0) }))
-                }, completion: nil)
-            case .error(let error):
-                print(error.localizedDescription)
-            }
-        }
+        getNotification()
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -62,5 +45,23 @@ class WeatherCollectionVC: UICollectionViewController {
         cell.timeLabel.text = cell.dateConfigure(with: weather)
         //cell.iconImage.image = UIImage(named: weather.icon)
         return cell
+    }
+    
+    private func getNotification() {
+        self.token = weather.observe { [weak self] changes in
+            guard let collection = self?.collectionView else { return }
+            switch changes {
+            case .initial:
+                collection.reloadData()
+            case .update(_, let delete, let insert, let update):
+                collection.performBatchUpdates ({
+                    collection.deleteItems(at: delete.map({ IndexPath(row: $0, section: 0) }))
+                    collection.insertItems(at: insert.map({ IndexPath(row: $0, section: 0) }))
+                    collection.reloadItems(at: update.map({ IndexPath(row: $0, section: 0) }))
+                }, completion: nil)
+            case .error(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

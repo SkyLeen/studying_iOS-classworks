@@ -33,7 +33,7 @@ class WeatherService {
             switch response.result {
             case .success(let value):
                 let weather = JSON(value)["list"].flatMap( { Weather(json: $0.1, city: city) } )
-                Saver.saveWeatherData(objects: weather)
+                WeatherSaver.saveWeatherData(weather: weather, for: city)
             case .failure(let error):
                 print(error)
             }

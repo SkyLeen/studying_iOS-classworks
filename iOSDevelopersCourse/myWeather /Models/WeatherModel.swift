@@ -17,6 +17,7 @@ class Weather: Object {
     @objc dynamic var weatherDescription: String = ""
     @objc dynamic var icon: String = ""
     @objc dynamic var city: String = ""
+    @objc dynamic var compoundKey: String = ""
 
     convenience init(json: JSON, city: String) {
         self.init()
@@ -27,9 +28,10 @@ class Weather: Object {
         self.icon = json["weather"][0]["icon"].stringValue
         self.weatherDescription = json["weather"][0]["main"].stringValue
         self.city = city
+        self.compoundKey = "\(id)\(city)"
     }
     
     @objc override open class func primaryKey() -> String? {
-        return "id"
+        return "compoundKey"
     }
 }
