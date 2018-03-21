@@ -10,8 +10,6 @@ import UIKit
 import RealmSwift
 
 class MyCitiesTableVC: UITableViewController {
-
-    var myCitiesArray = [String]()
     
     lazy var cities: Results<City>? = {
         return Loader.loadData(object: City())
