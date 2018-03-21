@@ -10,14 +10,14 @@ import RealmSwift
 
 class Saver {
     
-    static func saveWeatherData<T: Object>(objects: [T], filterFor item: String) {
+    static func saveWeatherData<T: Object>(objects: [T]) {
         var configuration = Realm.Configuration()
         configuration.deleteRealmIfMigrationNeeded = true
         Realm.Configuration.defaultConfiguration = configuration
         
         do {
             let realm = try Realm(configuration: configuration)
-            let oldItem = realm.objects(T.self).filter("city == %@", item)
+            let oldItem = realm.objects(T.self)
             try realm.write {
                 realm.delete(oldItem)
                 realm.add(objects, update: true)

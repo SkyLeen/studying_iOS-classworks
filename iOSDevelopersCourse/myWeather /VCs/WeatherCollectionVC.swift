@@ -12,18 +12,37 @@ import RealmSwift
 class WeatherCollectionVC: UICollectionViewController {
     
     var titleVC = ""
-    let weatherService = WeatherService()
-    private var weather = [Weather]()
+    private lazy var weather: Results<Weather> = {
+      return Loader.loadWeatherData(object: Weather())
+    }()
+    
+    private var token: NotificationToken?
+    
+    deinit {
+        token?.invalidate()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         navigationItem.title = titleVC
         
-        weatherService.loadWeatherDataFor5Days(for: titleVC) { [weak self]  in
-            let weathers = Loader.loadWeatherData(object: Weather()).filter("city == %@", (self?.titleVC)!)
-            self?.weather = Array(weathers)
-            self?.collectionView?.reloadData()
+        WeatherService.loadWeatherDataFor5Days(for: titleVC)
+        
+        token = weather.observe { [weak self] changes in
+            guard let collection = self?.collectionView else { return }
+            switch changes {
+            case .initial:
+                collection.reloadData()
+            case .update(_, let delete, let insert, let update):
+                collection.performBatchUpdates ({
+                    collection.deleteItems(at: delete.map({ IndexPath(row: $0, section: 0) }))
+                    collection.insertItems(at: insert.map({ IndexPath(row: $0, section: 0) }))
+                    collection.reloadItems(at: update.map({ IndexPath(row: $0, section: 0) }))
+                }, completion: nil)
+            case .error(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 
@@ -44,6 +63,4 @@ class WeatherCollectionVC: UICollectionViewController {
         //cell.iconImage.image = UIImage(named: weather.icon)
         return cell
     }
-    
-    
 }

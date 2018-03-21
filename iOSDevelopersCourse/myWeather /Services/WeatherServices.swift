@@ -11,12 +11,12 @@ import SwiftyJSON
 import RealmSwift
 
 class WeatherService {
-    let baseUrl = "http://api.openweathermap.org"
-    let appId = "cb13ebbbd6b51fb8e8b4110648fc195f"
+    static let baseUrl = "http://api.openweathermap.org"
+    static let appId = "cb13ebbbd6b51fb8e8b4110648fc195f"
     
-    var sessionManager = SessionManager()
+    static var sessionManager = SessionManager()
     
-    func loadWeatherDataFor5Days(for city: String, completion: @escaping () -> ()){
+    static func loadWeatherDataFor5Days(for city: String){
         let path = "/data/2.5/forecast"
         let parameters: Parameters = [
             "q":city,
@@ -33,8 +33,7 @@ class WeatherService {
             switch response.result {
             case .success(let value):
                 let weather = JSON(value)["list"].flatMap( { Weather(json: $0.1, city: city) } )
-                Saver.saveWeatherData(objects: weather, filterFor: city)
-                completion()
+                Saver.saveWeatherData(objects: weather)
             case .failure(let error):
                 print(error)
             }
