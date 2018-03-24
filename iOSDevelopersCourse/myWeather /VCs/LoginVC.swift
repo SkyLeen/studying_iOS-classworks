@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class LoginVC: UIViewController {
 
@@ -65,6 +66,7 @@ class LoginVC: UIViewController {
     
     @IBAction func logOut(segue: UIStoryboardSegue) {
         showCredentials()
+        removeDataBase()
     }
 
     func logIn() -> Bool {
@@ -88,6 +90,17 @@ class LoginVC: UIViewController {
     private func removeCredentials() {
         loginField.text?.removeAll()
         passwordField.text?.removeAll()
+    }
+    
+    private func removeDataBase() {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
     }
     
 }

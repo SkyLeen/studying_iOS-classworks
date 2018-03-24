@@ -7,36 +7,45 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MyCitiesTableVC: UITableViewController {
-
-    var myCitiesArray = [String]()
+    
+    lazy var cities: Results<City>? = {
+        return Loader.loadData(object: City())
+    }()
+    
+    var token: NotificationToken?
+    
+    deinit {
+        token?.invalidate()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getNotification()
     }
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let citiesCount = myCitiesArray.count
+        let citiesCount = cities!.count
         return citiesCount
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
          let cell = tableView.dequeueReusableCell(withIdentifier: "MyCitiesCell", for: indexPath) as! MyCitiesViewCell
-        
-         cell.myCityName.text = myCitiesArray[indexPath.row]
+        let cities = self.cities![indexPath.row]
+         cell.myCityName.text = cities.name
         
          return cell
      }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        let city = cities![indexPath.row]
         if editingStyle == .delete {
-            myCitiesArray.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            deleteCity(city: city)
         }
     }
     
@@ -48,25 +57,65 @@ class MyCitiesTableVC: UITableViewController {
         guard segue.identifier == "showWeather" else { return }
         guard let destVC = segue.destination as? WeatherCollectionVC else { return }
         guard let title = sender as? IndexPath else { return }
-        destVC.titleVC = myCitiesArray[title.row]
+        destVC.titleVC = cities![title.row].name
     }
     
     @IBAction func addCityPressed(_ sender: UIBarButtonItem) {
-        performSegue(withIdentifier: "showAllCities", sender: nil)
+        showAddCityFrom()
     }
     
-    @IBAction func addCity(segue: UIStoryboardSegue) {
-        guard segue.identifier == "addNewCity" else { return }
-        guard let allCitiesVC = segue.source as? AllCitiesTableVC else { return }
-        guard let cellNewCity = allCitiesVC.tableView.indexPathForSelectedRow else { return }
+    private func getNotification() {
+        token = cities?.observe({ [weak self] (changes: RealmCollectionChange) in
+            guard let tableView = self?.tableView else { return }
+            switch changes {
+            case .initial:
+                tableView.reloadData()
+                break
+            case .update(_, let delete, let insert, let update):
+                tableView.beginUpdates()
+                tableView.insertRows(at: insert.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                tableView.deleteRows(at: delete.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                tableView.reloadRows(at: update.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                tableView.endUpdates()
+                break
+            case .error(let error):
+                print(error.localizedDescription)
+                break
+            }
+        })
+    }
+    
+    private func showAddCityFrom() {
+        let alertForm = UIAlertController(title: "Enter city name", message: nil, preferredStyle: .alert)
+        alertForm.addTextField(configurationHandler: {(_ textField: UITextField) -> () in })
         
-        let newCity = allCitiesVC.citiesArray[cellNewCity.row]
+        let add = UIAlertAction(title: "Add", style: .default, handler: { [weak self] (action) in
+            guard let name = alertForm.textFields?[0].text else { return }
+            self?.addCity(name: name)
+            })
+        alertForm.addAction(add)
         
-        guard !myCitiesArray.contains(newCity) else {
-            present(AlertHelper().showAlert(withTitle: "Warning!", message: "There is a such City in the list"), animated: false)
-            return
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertForm.addAction(cancel)
+        
+        present(alertForm, animated: true, completion: nil)
+    }
+    
+    private func addCity(name: String) {
+        let city = City()
+        city.name = name
+        WeatherSaver.saveCities(city: city)
+    }
+    
+    private func deleteCity(city: City) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.delete(city.weather)
+                realm.delete(city)
+            }
+        } catch {
+            print(error.localizedDescription)
         }
-        myCitiesArray.append(newCity)
-        tableView.reloadData()
     }
 }

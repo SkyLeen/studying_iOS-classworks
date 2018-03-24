@@ -12,18 +12,21 @@ import RealmSwift
 class WeatherCollectionVC: UICollectionViewController {
     
     var titleVC = ""
-    let weatherService = WeatherService()
-    private var weather = [Weather]()
+    private lazy var weather: Results<Weather> = {
+      return Loader.loadData(object: Weather())
+    }()
+    
+    private var token: NotificationToken?
+    
+    deinit {
+        token?.invalidate()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.title = titleVC
-        
-        weatherService.loadWeatherDataFor5Days(for: titleVC) { [weak self]  in
-            self?.loadWeatherData(city: (self?.titleVC)!)
-            self?.collectionView?.reloadData()
-        }
+        WeatherService.loadWeatherDataFor5Days(for: titleVC)
+        getNotification()
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -38,18 +41,27 @@ class WeatherCollectionVC: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as! WeatherViewCell
         let weather = self.weather[indexPath.row]
 
-        cell.weatherLabel.text = "\(weather.temp) C, \(weather.description)"
+        cell.weatherLabel.text = "\(weather.temp) C, " + weather.weatherDescription
         cell.timeLabel.text = cell.dateConfigure(with: weather)
         //cell.iconImage.image = UIImage(named: weather.icon)
         return cell
     }
     
-    private func loadWeatherData(city: String) {
-        do {
-            let realm = try Realm()
-            self.weather = Array(realm.objects(Weather.self).filter("city == %@", city))
-        } catch {
-            print(error.localizedDescription)
+    private func getNotification() {
+        self.token = weather.observe { [weak self] changes in
+            guard let collection = self?.collectionView else { return }
+            switch changes {
+            case .initial:
+                collection.reloadData()
+            case .update(_, let delete, let insert, let update):
+                collection.performBatchUpdates ({
+                    collection.deleteItems(at: delete.map({ IndexPath(row: $0, section: 0) }))
+                    collection.insertItems(at: insert.map({ IndexPath(row: $0, section: 0) }))
+                    collection.reloadItems(at: update.map({ IndexPath(row: $0, section: 0) }))
+                }, completion: nil)
+            case .error(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 }
