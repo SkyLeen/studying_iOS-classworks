@@ -16,9 +16,11 @@ class LoginVC: UIViewController {
     
     let login = "skyleen"
     let password = "123456"
+    let credentials = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginField.text = credentials.string(forKey: "userName")
         let hideKbGesture = UITapGestureRecognizer(target: self, action: #selector(self.hideKeyboard))
         scrollView?.addGestureRecognizer(hideKbGesture)
     }
@@ -32,7 +34,7 @@ class LoginVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+        showCredentials()
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -62,6 +64,7 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func logOut(segue: UIStoryboardSegue) {
+        showCredentials()
     }
 
     func logIn() -> Bool {
@@ -69,11 +72,20 @@ class LoginVC: UIViewController {
             present(AlertHelper().showAlert(withTitle: "Warning", message: "Login or password incorrect"), animated: true)
             return false
         }
+        saveCredentials()
         removeCredentials()
         return true
     }
     
-    func removeCredentials() {
+    private func showCredentials() {
+        loginField.text = credentials.string(forKey: "userName")
+    }
+    
+    private func saveCredentials() {
+         credentials.set(loginField.text, forKey: "userName")
+    }
+    
+    private func removeCredentials() {
         loginField.text?.removeAll()
         passwordField.text?.removeAll()
     }
