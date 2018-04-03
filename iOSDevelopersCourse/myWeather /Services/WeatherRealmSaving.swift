@@ -11,10 +11,6 @@ import RealmSwift
 class WeatherSaver {
     
     static func saveCities(city: City) {
-        var configuration = Realm.Configuration()
-        configuration.deleteRealmIfMigrationNeeded = true
-        Realm.Configuration.defaultConfiguration = configuration
-        
         do {
             let realm = try Realm(configuration: configuration)
             try realm.write {
@@ -26,10 +22,6 @@ class WeatherSaver {
     }
     
     static func saveWeatherData (weather: [Weather], for city: String) {
-        var configuration = Realm.Configuration()
-        configuration.deleteRealmIfMigrationNeeded = true
-        Realm.Configuration.defaultConfiguration = configuration
-        
         do {
             let realm = try Realm(configuration: configuration)
             guard let city = realm.object(ofType: City.self, forPrimaryKey: city) else { return }
