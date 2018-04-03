@@ -12,7 +12,7 @@ class WeatherSaver {
     
     static func saveCities(city: City) {
         do {
-            let realm = try Realm(configuration: configuration)
+            let realm = try Realm()
             try realm.write {
                 realm.add(city, update: true)
             }
@@ -23,7 +23,7 @@ class WeatherSaver {
     
     static func saveWeatherData (weather: [Weather], for city: String) {
         do {
-            let realm = try Realm(configuration: configuration)
+            let realm = try Realm()
             guard let city = realm.object(ofType: City.self, forPrimaryKey: city) else { return }
             let oldWeather = city.weather
             try realm.write {
