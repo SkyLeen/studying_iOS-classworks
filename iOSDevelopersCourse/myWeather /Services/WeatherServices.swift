@@ -32,7 +32,7 @@ class WeatherService {
         sessionManager.request(url, method: .get, parameters: parameters).responseJSON { response in
             switch response.result {
             case .success(let value):
-                let weather = JSON(value)["list"].flatMap( { Weather(json: $0.1, city: city) } )
+                let weather = JSON(value)["list"].compactMap( { Weather(json: $0.1, city: city) } )
                 WeatherSaver.saveWeatherData(weather: weather, for: city)
             case .failure(let error):
                 print(error)

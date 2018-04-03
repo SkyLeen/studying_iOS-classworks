@@ -16,6 +16,8 @@
 		0416315E2040C6EC00446639 /* SettingsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416315D2040C6EC00446639 /* SettingsViewCell.swift */; };
 		0419AD632062594400C8E4B1 /* WeatherRealmSaving.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419AD622062594400C8E4B1 /* WeatherRealmSaving.swift */; };
 		0419AD6520625A6B00C8E4B1 /* WeatherRealmLoading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0419AD6420625A6B00C8E4B1 /* WeatherRealmLoading.swift */; };
+		047363482073969900873B09 /* GetHashImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047363472073969900873B09 /* GetHashImageOperation.swift */; };
+		0473634B2073A58800873B09 /* ExtWeatherCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473634A2073A58800873B09 /* ExtWeatherCollectionVC.swift */; };
 		047F26BF2062715700CCD79C /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F26BE2062715700CCD79C /* CityModel.swift */; };
 		04D219432049ED7D001E5B26 /* WeatherServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D219422049ED7D001E5B26 /* WeatherServices.swift */; };
 		04D2195220518D26001E5B26 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2195120518D26001E5B26 /* WeatherModel.swift */; };
@@ -37,6 +39,8 @@
 		0416315D2040C6EC00446639 /* SettingsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewCell.swift; sourceTree = "<group>"; };
 		0419AD622062594400C8E4B1 /* WeatherRealmSaving.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRealmSaving.swift; sourceTree = "<group>"; };
 		0419AD6420625A6B00C8E4B1 /* WeatherRealmLoading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRealmLoading.swift; sourceTree = "<group>"; };
+		047363472073969900873B09 /* GetHashImageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHashImageOperation.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		0473634A2073A58800873B09 /* ExtWeatherCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtWeatherCollectionVC.swift; sourceTree = "<group>"; };
 		047F26BE2062715700CCD79C /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
 		04D219422049ED7D001E5B26 /* WeatherServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServices.swift; sourceTree = "<group>"; };
 		04D2195120518D26001E5B26 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
@@ -64,6 +68,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		047363462073965900873B09 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				047363472073969900873B09 /* GetHashImageOperation.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		047363492073A56300873B09 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0473634A2073A58800873B09 /* ExtWeatherCollectionVC.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		0490991E2057E220009C784A /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,8 +137,10 @@
 			children = (
 				0490991E2057E220009C784A /* Models */,
 				04D2193F2049C965001E5B26 /* Services */,
-				04D2193E2049C91B001E5B26 /* Cells */,
+				047363462073965900873B09 /* Operations */,
 				04EEDEF72040516E004106E7 /* VCs */,
+				047363492073A56300873B09 /* Extensions */,
+				04D2193E2049C91B001E5B26 /* Cells */,
 				04D37E6A20381B1100F958AF /* AppDelegate.swift */,
 				04D37E6E20381B1100F958AF /* Main.storyboard */,
 				04D37E7120381B1100F958AF /* Assets.xcassets */,
@@ -186,7 +208,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Natalya Shikhalyova";
 				TargetAttributes = {
 					04D37E6620381B1100F958AF = {
@@ -292,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04D219432049ED7D001E5B26 /* WeatherServices.swift in Sources */,
+				047363482073969900873B09 /* GetHashImageOperation.swift in Sources */,
 				041631522040A42300446639 /* MyCitiesTableVC.swift in Sources */,
 				04D37E6B20381B1100F958AF /* AppDelegate.swift in Sources */,
 				041631562040ACC100446639 /* AlertHelper.swift in Sources */,
@@ -303,6 +326,7 @@
 				0416315E2040C6EC00446639 /* SettingsViewCell.swift in Sources */,
 				0416315B2040C6BB00446639 /* SettingsTableVC.swift in Sources */,
 				04D37E7D2038445C00F958AF /* LoginVC.swift in Sources */,
+				0473634B2073A58800873B09 /* ExtWeatherCollectionVC.swift in Sources */,
 				041631542040A66800446639 /* MyCitiesViewCell.swift in Sources */,
 				0416314E20408FC100446639 /* WeatherCollectionVC.swift in Sources */,
 			);
@@ -336,6 +360,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -343,6 +368,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -393,6 +419,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -400,6 +427,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

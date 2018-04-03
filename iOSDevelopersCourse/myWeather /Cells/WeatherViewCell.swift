@@ -15,7 +15,7 @@ class WeatherViewCell: UICollectionViewCell {
     
     static var dateFormatter: DateFormatter = {
         let dataFormatter = DateFormatter()
-        dataFormatter.dateFormat = "dd.MM.yyyy  HH.mm"
+        dataFormatter.dateFormat = "dd.MM.yyyy  HH:mm"
         return dataFormatter
     }()
     

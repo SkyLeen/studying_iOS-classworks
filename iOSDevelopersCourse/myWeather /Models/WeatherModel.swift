@@ -19,6 +19,10 @@ class Weather: Object {
     @objc dynamic var city: String = ""
     @objc dynamic var compoundKey: String = ""
 
+    var iconUrl: String {
+        return "http://openweathermap.org/img/w/\(icon).png"
+    }
+    
     convenience init(json: JSON, city: String) {
         self.init()
         

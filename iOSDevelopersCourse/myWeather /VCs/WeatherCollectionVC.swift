@@ -11,12 +11,19 @@ import RealmSwift
 
 class WeatherCollectionVC: UICollectionViewController {
     
-    var titleVC = ""
-    private lazy var weather: Results<Weather> = {
+    var titleVC: String = ""
+    let interItemSpace: CGFloat = 5
+    lazy var weather: Results<Weather> = {
       return Loader.loadData(object: Weather())
     }()
     
-    private var token: NotificationToken?
+    var token: NotificationToken?
+    
+    let operationQueue: OperationQueue = {
+        let queue = OperationQueue()
+        queue.qualityOfService = .userInteractive
+        return queue
+    } ()
     
     deinit {
         token?.invalidate()
@@ -43,25 +50,15 @@ class WeatherCollectionVC: UICollectionViewController {
 
         cell.weatherLabel.text = "\(weather.temp) C, " + weather.weatherDescription
         cell.timeLabel.text = cell.dateConfigure(with: weather)
-        //cell.iconImage.image = UIImage(named: weather.icon)
-        return cell
-    }
-    
-    private func getNotification() {
-        self.token = weather.observe { [weak self] changes in
-            guard let collection = self?.collectionView else { return }
-            switch changes {
-            case .initial:
-                collection.reloadData()
-            case .update(_, let delete, let insert, let update):
-                collection.performBatchUpdates ({
-                    collection.deleteItems(at: delete.map({ IndexPath(row: $0, section: 0) }))
-                    collection.insertItems(at: insert.map({ IndexPath(row: $0, section: 0) }))
-                    collection.reloadItems(at: update.map({ IndexPath(row: $0, section: 0) }))
-                }, completion: nil)
-            case .error(let error):
-                print(error.localizedDescription)
+        
+        let getImage = GetHashImage(url: weather.iconUrl)
+        getImage.completionBlock = {
+            OperationQueue.main.addOperation {
+                cell.iconImage.image = getImage.outputImage
             }
         }
+        operationQueue.addOperation(getImage)
+        
+        return cell
     }
 }
