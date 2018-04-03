@@ -51,7 +51,7 @@ class WeatherCollectionVC: UICollectionViewController {
         cell.weatherLabel.text = "\(weather.temp) C, " + weather.weatherDescription
         cell.timeLabel.text = cell.dateConfigure(with: weather)
         
-        let getImage = GetHashImage(url: weather.iconUrl)
+        let getImage = GetCashedImage(url: weather.iconUrl)
         getImage.completionBlock = {
             OperationQueue.main.addOperation {
                 cell.iconImage.image = getImage.outputImage

@@ -1,5 +1,5 @@
 //
-//  GetHashImageOperation.swift
+//  GetCashedImageOperation.swift
 //  myWeather 
 //
 //  Created by Natalya on 03/04/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GetHashImage: Operation {
+class GetCashedImage: Operation {
     
     private let cashLifeTime: TimeInterval = 2_592_000
     private let url: String
@@ -33,7 +33,7 @@ class GetHashImage: Operation {
         guard let cashDirectory = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first else { return nil }
         
         let name = String(describing: url.hashValue)
-        let filePath = cashDirectory.appendingPathComponent("\(GetHashImage.pathName)/\(name)").path
+        let filePath = cashDirectory.appendingPathComponent("\(GetCashedImage.pathName)/\(name)").path
         
         return filePath
     }()
