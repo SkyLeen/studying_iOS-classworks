@@ -11,7 +11,7 @@ import UIKit
 extension WeatherCollectionVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemsCount: CGFloat = 3
+        let itemsCount: CGFloat = 2
         let screenWidth = collectionView.bounds.size.width
         let itemWidth = (screenWidth - (interItemSpace * itemsCount))/itemsCount
         

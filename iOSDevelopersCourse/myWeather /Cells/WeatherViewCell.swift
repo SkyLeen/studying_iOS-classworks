@@ -50,7 +50,7 @@ class WeatherViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         setWeartherLabelSize()
-        setIconImage()
         setTimeLabelSize()
+        setIconImage()
     }
 }

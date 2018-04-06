@@ -38,7 +38,7 @@ extension WeatherViewCell {
         let timeLabelSize = getLabelSize(text: timeLabel.text!, font: timeLabel.font)
         
         let positionX = (self.bounds.width - timeLabelSize.width) / 2
-        let positionY = self.bounds.height - insets - timeLabelSize.height
+        let positionY = self.bounds.height - timeLabelSize.height  - insets * 2
         let labelOrigin = CGPoint(x: positionX, y: positionY)
         
         let rect = CGRect(origin: labelOrigin, size: timeLabelSize)
@@ -46,7 +46,7 @@ extension WeatherViewCell {
     }
     
     func setIconImage() {
-        let side: CGFloat = self.bounds.height - timeLabel.bounds.height - weatherLabel.bounds.height - insets * 2
+        let side: CGFloat = 90
         let iconSize = CGSize(width: side, height: side)
     
         let positionX = (self.bounds.midX - side / 2)

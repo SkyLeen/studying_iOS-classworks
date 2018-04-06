@@ -89,6 +89,7 @@
 				0473636B2077E2F700873B09 /* ExtWeatherViewCell.swift */,
 				0473636720778C3800873B09 /* ExtFormatter.swift */,
 				0473636920778CD600873B09 /* ExtDate.swift */,
+				04D37E6A20381B1100F958AF /* AppDelegate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -150,7 +151,6 @@
 				04EEDEF72040516E004106E7 /* VCs */,
 				04D2193E2049C91B001E5B26 /* Cells */,
 				047363492073A56300873B09 /* Extensions */,
-				04D37E6A20381B1100F958AF /* AppDelegate.swift */,
 				04D37E6E20381B1100F958AF /* Main.storyboard */,
 				04D37E7120381B1100F958AF /* Assets.xcassets */,
 				04D37E7620381B1100F958AF /* Info.plist */,
