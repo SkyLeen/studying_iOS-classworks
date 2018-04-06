@@ -33,7 +33,7 @@ class WeatherCollectionVC: UICollectionViewController {
         super.viewDidLoad()
         navigationItem.title = titleVC
         WeatherService.loadWeatherDataFor5Days(for: titleVC)
-        getNotification()
+        token = AlertHelper.setNotification(to: weather, view: self.collectionView)
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -49,7 +49,7 @@ class WeatherCollectionVC: UICollectionViewController {
         let weather = self.weather[indexPath.row]
 
         cell.weatherLabel.text = "\(weather.temp) C, " + weather.weatherDescription
-        cell.timeLabel.text = cell.dateConfigure(with: weather)
+        cell.timeLabel.text = Date(timeIntervalSince1970: weather.dateTime).formatted
         
         let getImage = GetCashedImage(url: weather.iconUrl)
         getImage.completionBlock = {

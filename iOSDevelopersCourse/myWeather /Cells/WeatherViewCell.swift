@@ -9,25 +9,27 @@
 import UIKit
 
 class WeatherViewCell: UICollectionViewCell {
-    @IBOutlet weak var weatherLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var iconImage: UIImageView!
+    @IBOutlet weak var weatherLabel: UILabel! {
+        didSet {
+            weatherLabel.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
     
-    static var dateFormatter: DateFormatter = {
-        let dataFormatter = DateFormatter()
-        dataFormatter.dateFormat = "dd.MM.yyyy  HH:mm"
-        return dataFormatter
-    }()
+    @IBOutlet weak var timeLabel: UILabel! {
+        didSet {
+            timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    @IBOutlet weak var iconImage: UIImageView! {
+        didSet {
+            iconImage.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         layer.cornerRadius = 16
         layer.masksToBounds = true
-    }
-    
-    func dateConfigure(with weather: Weather) -> String {
-        let date = Date(timeIntervalSince1970: weather.dateTime)
-        let dateString = WeatherViewCell.dateFormatter.string(from: date)
-        return dateString
     }
 }

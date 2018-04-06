@@ -11,13 +11,4 @@ import UIKit
 class MyCitiesViewCell: UITableViewCell {
 
     @IBOutlet weak var myCityName: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
 }

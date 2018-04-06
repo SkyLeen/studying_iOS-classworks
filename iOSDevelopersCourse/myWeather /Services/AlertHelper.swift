@@ -6,7 +6,7 @@
 //  Copyright © 2018 Natalya Shikhalyova. All rights reserved.
 //
 
-import UIKit
+import RealmSwift
 
 struct AlertHelper {
     
@@ -17,5 +17,24 @@ struct AlertHelper {
         alertController.addAction(actionButton)
         
         return alertController
+    }
+    
+    static func setNotification<T: Object>(to array: Results<T>, view: UICollectionView?) -> NotificationToken {
+        let token = array.observe { [weak view] changes in
+            guard let view = view else { return }
+            switch changes {
+            case .initial:
+                view.reloadData()
+            case .update(_, let delete, let insert, let update):
+                view.performBatchUpdates ({
+                    view.deleteItems(at: delete.map({ IndexPath(row: $0, section: 0) }))
+                    view.insertItems(at: insert.map({ IndexPath(row: $0, section: 0) }))
+                    view.reloadItems(at: update.map({ IndexPath(row: $0, section: 0) }))
+                }, completion: nil)
+            case .error(let error):
+                print(error.localizedDescription)
+            }
+        }
+        return token
     }
 }
