@@ -48,8 +48,7 @@ class WeatherCollectionVC: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as! WeatherViewCell
         let weather = self.weather[indexPath.row]
 
-        cell.weatherLabel.text = "\(weather.temp) C, " + weather.weatherDescription
-        cell.timeLabel.text = Date(timeIntervalSince1970: weather.dateTime).formatted
+        cell.weather = weather
         
         let getImage = GetCashedImage(url: weather.iconUrl)
         getImage.completionBlock = {

@@ -9,6 +9,7 @@
 import UIKit
 
 class WeatherViewCell: UICollectionViewCell {
+    
     @IBOutlet weak var weatherLabel: UILabel! {
         didSet {
             weatherLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -27,9 +28,29 @@ class WeatherViewCell: UICollectionViewCell {
         }
     }
     
+    var weather: Weather? {
+        didSet {
+            guard let weather = self.weather else { return }
+            weatherLabel.text = "\(weather.temp) C, " + weather.weatherDescription
+            timeLabel.text = Date(timeIntervalSince1970: weather.dateTime).formatted
+            
+            setWeartherLabelSize()
+            setTimeLabelSize()
+        }
+    }
+    
+    let insets: CGFloat = 5
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         layer.cornerRadius = 16
         layer.masksToBounds = true
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setWeartherLabelSize()
+        setIconImage()
+        setTimeLabelSize()
     }
 }
