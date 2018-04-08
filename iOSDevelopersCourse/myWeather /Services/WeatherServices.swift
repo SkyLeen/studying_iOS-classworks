@@ -29,7 +29,7 @@ class WeatherService {
         configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
        
         sessionManager = SessionManager(configuration: configuration)
-        sessionManager.request(url, method: .get, parameters: parameters).responseJSON { response in
+        sessionManager.request(url, method: .get, parameters: parameters).responseJSON(queue: DispatchQueue.global(qos: .utility)) { response in
             switch response.result {
             case .success(let value):
                 let weather = JSON(value)["list"].compactMap( { Weather(json: $0.1, city: city) } )
