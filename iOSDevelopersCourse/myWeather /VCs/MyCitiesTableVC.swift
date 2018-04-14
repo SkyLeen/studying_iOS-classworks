@@ -8,10 +8,13 @@
 
 import UIKit
 import RealmSwift
+import FirebaseDatabase
 
 class MyCitiesTableVC: UITableViewController {
     
-    lazy var cities: Results<City>? = {
+    let dbLink = Database.database().reference()
+    
+    lazy var cities: Results<City>! = {
         return Loader.loadData(object: City())
     }()
     
@@ -24,7 +27,11 @@ class MyCitiesTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getNotification()
+        
+        let data = Array(cities).map { $0.makeAny }
+        dbLink.child("Weather").setValue(data)
     }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

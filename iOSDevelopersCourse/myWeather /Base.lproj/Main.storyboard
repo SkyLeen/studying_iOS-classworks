@@ -86,7 +86,7 @@
                                             </mask>
                                         </variation>
                                         <connections>
-                                            <segue destination="fAW-te-Zjk" kind="presentation" identifier="goNextView" modalTransitionStyle="crossDissolve" id="lep-o9-pbV"/>
+                                            <action selector="buttonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Qu-BU-lcb"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -178,6 +178,7 @@
                         <outlet property="loginField" destination="tKI-bs-50k" id="hsY-Hj-YJn"/>
                         <outlet property="passwordField" destination="jf8-oo-KNY" id="yX0-5E-bzm"/>
                         <outlet property="scrollView" destination="nUI-VC-vIl" id="sM4-04-gX5"/>
+                        <segue destination="fAW-te-Zjk" kind="presentation" identifier="goNextView" id="zWt-Gg-5tf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

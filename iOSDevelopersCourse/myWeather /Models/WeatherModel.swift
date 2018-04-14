@@ -23,6 +23,14 @@ class Weather: Object {
         return "http://openweathermap.org/img/w/\(icon).png"
     }
     
+    var makeAny: Any {
+        return [
+            "date":dateTime,
+            "temp":temp,
+            "weatherDescription":weatherDescription
+        ]
+    }
+    
     convenience init(json: JSON, city: String) {
         self.init()
         

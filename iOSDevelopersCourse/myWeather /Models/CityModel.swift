@@ -13,6 +13,13 @@ class City: Object {
     @objc dynamic var name: String = ""
     let weather = List<Weather>()
     
+    var makeAny: Any {
+        return [
+            "city":name,
+            "weather":Array(weather).map { $0.makeAny }
+        ]
+    }
+    
     @objc override open class func primaryKey() -> String? {
         return "name"
     }

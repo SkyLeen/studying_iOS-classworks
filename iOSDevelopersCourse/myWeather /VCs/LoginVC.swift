@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import FirebaseAuth
 
 class LoginVC: UIViewController {
 
@@ -15,9 +16,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var loginField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    
-    let login = "skyleen"
-    let password = "123456"
+  
     let credentials = UserDefaults.standard
     
     override func viewDidLoad() {
@@ -41,11 +40,6 @@ class LoginVC: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        let result = logIn()
-        return result
-    }
-    
     @objc func keyboardWasShown(notification: Notification) {
         let kbInfo = notification.userInfo! as NSDictionary
         let kbSize = (kbInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue).cgRectValue.size
@@ -66,19 +60,29 @@ class LoginVC: UIViewController {
         self.scrollView?.endEditing(true)
     }
     
+    @IBAction func buttonPressed(_ sender: UIButton) {
+        checkCredentials { [weak self] checkResult in
+            if checkResult {
+                self?.performSegue(withIdentifier: "goNextView", sender: nil)
+                self?.saveCredentials()
+                self?.removeCredentials()
+            }
+        }
+    }
+    
+    
     @IBAction func logOut(segue: UIStoryboardSegue) {
         showCredentials()
         removeDataBase()
     }
-
-    func logIn() -> Bool {
-        guard loginField.text == login && passwordField.text == password else {
-            present(AlertHelper().showAlert(withTitle: "Warning", message: "Login or password incorrect"), animated: true)
-            return false
+    
+    private func checkCredentials(completion: @escaping (Bool) -> ()) {
+        let login = loginField.text!
+        let password = passwordField.text!
+        
+        Auth.auth().signIn(withEmail: login, password: password) { (user, error) in
+            completion(user != nil)
         }
-        saveCredentials()
-        removeCredentials()
-        return true
     }
     
     private func showCredentials() {
@@ -90,7 +94,6 @@ class LoginVC: UIViewController {
     }
     
     private func removeCredentials() {
-        loginField.text?.removeAll()
         passwordField.text?.removeAll()
     }
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0413B22F2082375A0045A40C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0413B22E2082375A0045A40C /* GoogleService-Info.plist */; };
 		0416314E20408FC100446639 /* WeatherCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416314D20408FC100446639 /* WeatherCollectionVC.swift */; };
 		041631522040A42300446639 /* MyCitiesTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041631512040A42300446639 /* MyCitiesTableVC.swift */; };
 		041631542040A66800446639 /* MyCitiesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041631532040A66800446639 /* MyCitiesViewCell.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0413B22E2082375A0045A40C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0416314D20408FC100446639 /* WeatherCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionVC.swift; sourceTree = "<group>"; };
 		041631512040A42300446639 /* MyCitiesTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCitiesTableVC.swift; sourceTree = "<group>"; };
 		041631532040A66800446639 /* MyCitiesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCitiesViewCell.swift; sourceTree = "<group>"; };
@@ -89,7 +91,6 @@
 				0473636B2077E2F700873B09 /* ExtWeatherViewCell.swift */,
 				0473636720778C3800873B09 /* ExtFormatter.swift */,
 				0473636920778CD600873B09 /* ExtDate.swift */,
-				04D37E6A20381B1100F958AF /* AppDelegate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -145,6 +146,7 @@
 		04D37E6920381B1100F958AF /* myWeather  */ = {
 			isa = PBXGroup;
 			children = (
+				04D37E6A20381B1100F958AF /* AppDelegate.swift */,
 				0490991E2057E220009C784A /* Models */,
 				04D2193F2049C965001E5B26 /* Services */,
 				047363462073965900873B09 /* Operations */,
@@ -152,9 +154,10 @@
 				04D2193E2049C91B001E5B26 /* Cells */,
 				047363492073A56300873B09 /* Extensions */,
 				04D37E6E20381B1100F958AF /* Main.storyboard */,
+				04EA44B5203C2F5E00074ACA /* Launch.storyboard */,
 				04D37E7120381B1100F958AF /* Assets.xcassets */,
 				04D37E7620381B1100F958AF /* Info.plist */,
-				04EA44B5203C2F5E00074ACA /* Launch.storyboard */,
+				0413B22E2082375A0045A40C /* GoogleService-Info.plist */,
 			);
 			path = "myWeather ";
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04D37E7220381B1100F958AF /* Assets.xcassets in Resources */,
+				0413B22F2082375A0045A40C /* GoogleService-Info.plist in Resources */,
 				04D37E7020381B1100F958AF /* Main.storyboard in Resources */,
 				04EA44B6203C2F5E00074ACA /* Launch.storyboard in Resources */,
 			);
@@ -299,16 +303,24 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-myWeather /Pods-myWeather -frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
