@@ -23,6 +23,7 @@
 		0473636A20778CD600873B09 /* ExtDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473636920778CD600873B09 /* ExtDate.swift */; };
 		0473636C2077E2F700873B09 /* ExtWeatherViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473636B2077E2F700873B09 /* ExtWeatherViewCell.swift */; };
 		047F26BF2062715700CCD79C /* CityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047F26BE2062715700CCD79C /* CityModel.swift */; };
+		048E842C20B6A32400C49AA0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048E842B20B6A32400C49AA0 /* CloudKit.framework */; };
 		04D219432049ED7D001E5B26 /* WeatherServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D219422049ED7D001E5B26 /* WeatherServices.swift */; };
 		04D2195220518D26001E5B26 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D2195120518D26001E5B26 /* WeatherModel.swift */; };
 		04D37E6B20381B1100F958AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D37E6A20381B1100F958AF /* AppDelegate.swift */; };
@@ -50,6 +51,8 @@
 		0473636920778CD600873B09 /* ExtDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtDate.swift; sourceTree = "<group>"; };
 		0473636B2077E2F700873B09 /* ExtWeatherViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtWeatherViewCell.swift; sourceTree = "<group>"; };
 		047F26BE2062715700CCD79C /* CityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityModel.swift; sourceTree = "<group>"; };
+		048E842A20B6A32100C49AA0 /* myWeather .entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "myWeather .entitlements"; sourceTree = "<group>"; };
+		048E842B20B6A32400C49AA0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		04D219422049ED7D001E5B26 /* WeatherServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherServices.swift; sourceTree = "<group>"; };
 		04D2195120518D26001E5B26 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		04D37E6720381B1100F958AF /* myWeather .app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "myWeather .app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +73,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2541F30C436840D9BEF9311 /* Pods_myWeather_.framework in Frameworks */,
+				048E842C20B6A32400C49AA0 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +150,7 @@
 		04D37E6920381B1100F958AF /* myWeather  */ = {
 			isa = PBXGroup;
 			children = (
+				048E842A20B6A32100C49AA0 /* myWeather .entitlements */,
 				04D37E6A20381B1100F958AF /* AppDelegate.swift */,
 				0490991E2057E220009C784A /* Models */,
 				04D2193F2049C965001E5B26 /* Services */,
@@ -176,6 +181,7 @@
 		27FB8D638D80A381B196A478 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				048E842B20B6A32400C49AA0 /* CloudKit.framework */,
 				A6BA18A389E41779E9ED7F4D /* Pods_myWeather_.framework */,
 			);
 			name = Frameworks;
@@ -226,6 +232,17 @@
 					04D37E6620381B1100F958AF = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -486,6 +503,7 @@
 			baseConfigurationReference = A428C5F4D1C7EF8984F72B79 /* Pods-myWeather .debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "myWeather /myWeather .entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4SYRYWB23;
 				INFOPLIST_FILE = "$(SRCROOT)/myWeather /Info.plist";
@@ -503,6 +521,7 @@
 			baseConfigurationReference = 6ECC219EA44C7FB8827390A3 /* Pods-myWeather .release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "myWeather /myWeather .entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = G4SYRYWB23;
 				INFOPLIST_FILE = "$(SRCROOT)/myWeather /Info.plist";

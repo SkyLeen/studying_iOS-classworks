@@ -14,9 +14,7 @@ class WeatherService {
     static let baseUrl = "http://api.openweathermap.org"
     static let appId = "cb13ebbbd6b51fb8e8b4110648fc195f"
     
-    static var sessionManager = SessionManager()
-    
-    static func loadWeatherDataFor5Days(for city: String){
+    static func loadWeatherDataFor5Days(for city: String, closure: @escaping ()->()){
         let path = "/data/2.5/forecast"
         let parameters: Parameters = [
             "q":city,
@@ -25,15 +23,12 @@ class WeatherService {
         ]
         let url = baseUrl+path
         
-        let configuration = URLSessionConfiguration.default
-        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
-       
-        sessionManager = SessionManager(configuration: configuration)
-        sessionManager.request(url, method: .get, parameters: parameters).responseJSON(queue: DispatchQueue.global(qos: .utility)) { response in
+        Alamofire.request(url, method: .get, parameters: parameters).responseJSON { response in
             switch response.result {
             case .success(let value):
                 let weather = JSON(value)["list"].compactMap( { Weather(json: $0.1, city: city) } )
                 WeatherSaver.saveWeatherData(weather: weather, for: city)
+                closure()
             case .failure(let error):
                 print(error)
             }

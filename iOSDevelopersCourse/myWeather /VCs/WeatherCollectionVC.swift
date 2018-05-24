@@ -32,7 +32,7 @@ class WeatherCollectionVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = titleVC
-        WeatherService.loadWeatherDataFor5Days(for: titleVC)
+        WeatherService.loadWeatherDataFor5Days(for: titleVC, closure: {})
         token = AlertHelper.setNotification(to: weather, view: self.collectionView)
     }
 
