@@ -13,8 +13,23 @@ class CloudSaver {
     static private let recordType = "Weather"
     static private var recordIDsToDelete = [CKRecordID]()
     static private var cloudDB: CKDatabase = CKContainer.default().publicCloudDatabase
+    static private var lastUpdate: Date? {
+        get {
+            return UserDefaults.standard.object(forKey: "LastUpdate") as? Date
+        }
+        
+        set {
+            UserDefaults.standard.set(newValue, forKey: "LastUpdate")
+        }
+    }
     
     static func operateDataCloud(weather: [Weather]) {
+        if lastUpdate != nil, abs(lastUpdate!.timeIntervalSinceNow) < 30 {
+            print("Update isn`t nessesary")
+            return
+        }
+        self.recordIDsToDelete.removeAll()
+        self.lastUpdate = Date()
         
         let operation = CKModifyRecordsOperation()
         
@@ -28,7 +43,7 @@ class CloudSaver {
         queryOpDel.queryCompletionBlock = { (cursor: CKQueryCursor?, error: Error?) in
             if let error = error {
                 print(error.localizedDescription)
-            } else {
+            } else  {
                 operation.recordIDsToDelete = self.recordIDsToDelete
                 
                 operation.modifyRecordsCompletionBlock = { (savedRecords: [CKRecord]?, deletedRecordIDs: [CKRecordID]?, error: Error?) in

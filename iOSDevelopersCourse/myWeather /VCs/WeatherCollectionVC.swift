@@ -42,7 +42,15 @@ class WeatherCollectionVC: UICollectionViewController {
         WeatherService.loadWeatherDataFor5Days(for: titleVC, closure: {
             CloudSaver.operateDataCloud(weather: Array(self.weather))
         })
-        token = AlertHelper.setNotification(to: weather, view: self.collectionView)
+        
+        loadDataFromCloud { [weak self] weather in
+            self?.weatherArray = weather
+            DispatchQueue.main.async {
+               self?.collectionView?.reloadData()
+            }
+        }
+
+        //token = AlertHelper.setNotification(to: weather, view: self.collectionView)
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -50,12 +58,12 @@ class WeatherCollectionVC: UICollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return weather.count
+        return weatherArray.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCell", for: indexPath) as! WeatherViewCell
-        let weather = self.weather[indexPath.row]
+        let weather = self.weatherArray[indexPath.row]
         
         cell.weather = weather
         
@@ -94,23 +102,28 @@ extension WeatherCollectionVC: UICollectionViewDelegateFlowLayout {
 
 extension WeatherCollectionVC {
     
-    private func loadDataFromCloud() -> [Weather] {
+    private func loadDataFromCloud(closure: @escaping ([Weather]) -> ()) {
         var weatherArr = [Weather]()
         let predicate = NSPredicate(value: true)
         let query = CKQuery(recordType: recordType, predicate: predicate)
-        let queryOp = CKQueryOperation(query: query)
-        queryOp.recordFetchedBlock = { (record: CKRecord!) in
-            let weatherItem = Weather()
-            weatherItem.id = String(describing: record.value(forKey: "id"))
-            weatherItem.city = String(describing: record.value(forKey: "city"))
-            weatherItem.dateTime = record.value(forKey: "dateTime") as! Double
-            weatherItem.icon = String(describing: record.value(forKey: "icon"))
-            weatherItem.temp = record.value(forKey: "temp") as! Double
-            weatherItem.compoundKey = String(describing: record.value(forKey: "id")) + String(describing: record.value(forKey: "city"))
-            weatherArr.append(weatherItem)
+        cloudDB.perform(query, inZoneWith: nil) { (records, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            if let records = records
+            {
+                for record in records {
+                    let weatherItem = Weather()
+                    weatherItem.id = String(describing: record.value(forKey: "id"))
+                    weatherItem.city = String(describing: record.value(forKey: "city"))
+                    weatherItem.dateTime = record.value(forKey: "dateTime") as! Double
+                    weatherItem.icon = String(describing: record.value(forKey: "icon"))
+                    weatherItem.temp = record.value(forKey: "temp") as! Double
+                    weatherItem.compoundKey = String(describing: record.value(forKey: "id")) + String(describing: record.value(forKey: "city"))
+                    weatherArr.append(weatherItem)
+                }
+                closure(weatherArr)
+            } 
         }
-        cloudDB.add(queryOp)
-        
-        return weatherArr
     }
 }
