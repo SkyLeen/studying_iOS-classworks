@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         for city in cities {
             dispatchGroup.enter()
             
-            WeatherService.loadWeatherDataFor5Days(for: city.name) {
+            WeatherService.loadWeatherDataFor5Days(for: city.name) { _ in
                 self.dispatchGroup.leave()
             }
         }

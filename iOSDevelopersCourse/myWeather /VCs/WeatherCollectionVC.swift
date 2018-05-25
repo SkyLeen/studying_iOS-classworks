@@ -39,8 +39,8 @@ class WeatherCollectionVC: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = titleVC
-        WeatherService.loadWeatherDataFor5Days(for: titleVC, closure: {
-            CloudSaver.operateDataCloud(weather: Array(self.weather))
+        WeatherService.loadWeatherDataFor5Days(for: titleVC, closure: { weather in
+            CloudSaver.operateDataCloud(weather: weather)
         })
         
         loadDataFromCloud { [weak self] weather in
@@ -119,7 +119,7 @@ extension WeatherCollectionVC {
                     weatherItem.dateTime = record.value(forKey: "dateTime") as! Double
                     weatherItem.icon = String(describing: record.value(forKey: "icon"))
                     weatherItem.temp = record.value(forKey: "temp") as! Double
-                    weatherItem.compoundKey = String(describing: record.value(forKey: "id")) + String(describing: record.value(forKey: "city"))
+                    weatherItem.compoundKey = String(describing: record.recordID.recordName)
                     weatherArr.append(weatherItem)
                 }
                 closure(weatherArr)

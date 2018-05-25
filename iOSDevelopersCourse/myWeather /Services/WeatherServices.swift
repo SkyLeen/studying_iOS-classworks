@@ -14,7 +14,7 @@ class WeatherService {
     static let baseUrl = "http://api.openweathermap.org"
     static let appId = "cb13ebbbd6b51fb8e8b4110648fc195f"
     
-    static func loadWeatherDataFor5Days(for city: String, closure: @escaping ()->()){
+    static func loadWeatherDataFor5Days(for city: String, closure: @escaping ([Weather])->()){
         let path = "/data/2.5/forecast"
         let parameters: Parameters = [
             "q":city,
@@ -28,7 +28,7 @@ class WeatherService {
             case .success(let value):
                 let weather = JSON(value)["list"].compactMap( { Weather(json: $0.1, city: city) } )
                 WeatherSaver.saveWeatherData(weather: weather, for: city)
-                closure()
+                closure(weather)
             case .failure(let error):
                 print(error)
             }
