@@ -54,6 +54,9 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         loadWeather(for: cities[counter].name)
         counter = counter + 1
     }
+}
+
+extension TodayViewController {
     
     private func loadWeather(for city: String) {
         WeatherService.loadWeatherDataFor5Days(for: city, closure: { weather in
@@ -97,5 +100,4 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             objectTypes: [Weather.self, City.self])
         Realm.Configuration.defaultConfiguration = configuration
     }
-    
 }
