@@ -7,8 +7,20 @@ target 'myWeather ' do
 pod 'Alamofire', '~> 4.6'
 pod 'SwiftyJSON', '~> 4.0.0'
 pod 'RealmSwift'
-pod 'Firebase/Core'
-pod 'Firebase/Auth'
-pod 'Firebase/Database'
+pod 'Firebase/Core', '4.9.0'
+pod 'Firebase/Auth', '4.9.0'
+pod 'Firebase/Database', '4.9.0'
+
+end
+
+target 'myWeatherWidget' do
+  use_frameworks!
+
+pod 'Alamofire', '~> 4.6'
+pod 'SwiftyJSON', '~> 4.0.0'
+pod 'RealmSwift'
+pod 'Firebase/Core', '4.9.0'
+pod 'Firebase/Auth', '4.9.0'
+pod 'Firebase/Database', '4.9.0'
 
 end
