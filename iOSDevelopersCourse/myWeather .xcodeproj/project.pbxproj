@@ -43,6 +43,7 @@
 		04D9E80020B962A200458F2E /* GetCashedImageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047363472073969900873B09 /* GetCashedImageOperation.swift */; };
 		04D9E80120B962A800458F2E /* ExtFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473636720778C3800873B09 /* ExtFormatter.swift */; };
 		04D9E80220B962AB00458F2E /* ExtDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0473636920778CD600873B09 /* ExtDate.swift */; };
+		04D9E80320B9816300458F2E /* AlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041631552040ACC100446639 /* AlertHelper.swift */; };
 		04EA44B6203C2F5E00074ACA /* Launch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04EA44B5203C2F5E00074ACA /* Launch.storyboard */; };
 		C2541F30C436840D9BEF9311 /* Pods_myWeather_.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6BA18A389E41779E9ED7F4D /* Pods_myWeather_.framework */; };
 		D2B3A792DD96AC8EEE6374E2 /* Pods_myWeatherWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EE50188393FB301F0086458 /* Pods_myWeatherWidget.framework */; };
@@ -337,7 +338,7 @@
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -508,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04D9E80120B962A800458F2E /* ExtFormatter.swift in Sources */,
+				04D9E80320B9816300458F2E /* AlertHelper.swift in Sources */,
 				04D9E7FC20B9629100458F2E /* WeatherRealmSaving.swift in Sources */,
 				0446653720B959F400300F5E /* WeatherServices.swift in Sources */,
 				04D9E7FE20B9629600458F2E /* WeatherCloudSaving.swift in Sources */,

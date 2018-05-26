@@ -66,8 +66,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        var configuration = Realm.Configuration()
-        configuration.deleteRealmIfMigrationNeeded = true
+        var configuration = Realm.Configuration(
+            fileURL: FileManager
+                    .default
+                    .containerURL(forSecurityApplicationGroupIdentifier: "group.myWeatherGroup")?.appendingPathComponent("default.realm"),
+            deleteRealmIfMigrationNeeded: true,
+            objectTypes: [Weather.self, City.self])
         Realm.Configuration.defaultConfiguration = configuration
         
         print(configuration.fileURL!)

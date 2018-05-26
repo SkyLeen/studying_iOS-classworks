@@ -47,20 +47,30 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="o9W-Vn-vkh">
+                                <rect key="frame" x="0.0" y="85" width="320" height="15"/>
+                                <connections>
+                                    <action selector="changePages:" destination="M4Y-Lb-cyx" eventType="valueChanged" id="9Ma-s1-lo1"/>
+                                </connections>
+                            </pageControl>
                         </subviews>
                         <constraints>
                             <constraint firstItem="Y8Q-rd-JkC" firstAttribute="top" secondItem="ssy-KU-ocm" secondAttribute="top" constant="15" id="0pu-1J-Cb1"/>
                             <constraint firstItem="iPh-tF-FVs" firstAttribute="leading" secondItem="Y8Q-rd-JkC" secondAttribute="trailing" constant="15" id="8Wf-VP-kJY"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="o9W-Vn-vkh" secondAttribute="bottom" id="AJy-we-zVV"/>
                             <constraint firstItem="ssy-KU-ocm" firstAttribute="trailing" secondItem="4ML-Ot-HTV" secondAttribute="trailing" constant="15" id="Auz-j3-pjw"/>
                             <constraint firstItem="GcN-lo-r42" firstAttribute="leading" secondItem="Y8Q-rd-JkC" secondAttribute="trailing" constant="15" id="BoG-gN-qjp"/>
                             <constraint firstItem="4ML-Ot-HTV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iPh-tF-FVs" secondAttribute="trailing" constant="15" id="EJZ-Ff-XnO"/>
+                            <constraint firstItem="o9W-Vn-vkh" firstAttribute="top" secondItem="Y8Q-rd-JkC" secondAttribute="bottom" id="JFd-Iw-3Jz"/>
                             <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="4ML-Ot-HTV" secondAttribute="bottom" constant="15" id="Kvf-aT-g7r"/>
+                            <constraint firstItem="o9W-Vn-vkh" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" id="Nxt-LR-hwU"/>
                             <constraint firstItem="4ML-Ot-HTV" firstAttribute="top" secondItem="ssy-KU-ocm" secondAttribute="top" constant="15" id="Of6-db-Qgg"/>
                             <constraint firstItem="4ML-Ot-HTV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GcN-lo-r42" secondAttribute="trailing" constant="15" id="Osf-mx-e6S"/>
                             <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="Y8Q-rd-JkC" secondAttribute="bottom" constant="15" id="PTH-XK-gfR"/>
                             <constraint firstItem="Y8Q-rd-JkC" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" constant="15" id="YjT-hF-tXl"/>
                             <constraint firstItem="GcN-lo-r42" firstAttribute="top" secondItem="ssy-KU-ocm" secondAttribute="top" constant="15" id="Z54-Qu-4r9"/>
                             <constraint firstItem="iPh-tF-FVs" firstAttribute="top" secondItem="GcN-lo-r42" secondAttribute="bottom" constant="5" id="bxn-gG-ITH"/>
+                            <constraint firstItem="o9W-Vn-vkh" firstAttribute="trailing" secondItem="ssy-KU-ocm" secondAttribute="trailing" id="sCL-vb-C41"/>
                             <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="iPh-tF-FVs" secondAttribute="bottom" constant="15" id="v32-ef-tYf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
@@ -72,6 +82,7 @@
                         <outlet property="cityLabel" destination="GcN-lo-r42" id="isw-bP-Aqt"/>
                         <outlet property="descriptionLabel" destination="iPh-tF-FVs" id="L2Y-Qu-pbQ"/>
                         <outlet property="imageLabel" destination="Y8Q-rd-JkC" id="Tf2-NV-1HP"/>
+                        <outlet property="pages" destination="o9W-Vn-vkh" id="ltf-fQ-2ct"/>
                         <outlet property="tempLabel" destination="4ML-Ot-HTV" id="y0X-X0-Ipv"/>
                     </connections>
                 </viewController>
