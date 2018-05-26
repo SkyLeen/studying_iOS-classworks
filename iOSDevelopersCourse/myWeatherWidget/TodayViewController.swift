@@ -41,6 +41,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         completionHandler(NCUpdateResult.newData)
     }
     
+    @IBAction func showApp(_ sender: UIButton) {
+        extensionContext?.open(URL(string: "myWeatherApp://")!)
+    }
+    
     @IBAction func changePages(_ sender: UIPageControl) {
         if counter >= count {
             counter = 0
@@ -61,7 +65,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             }
             self.cityLabel.text = weather.city
             self.descriptionLabel.text = weather.weatherDescription
-            self.tempLabel.text = "\(weather.temp) C"
+            self.tempLabel.text = "\(lroundf(Float(weather.temp))) C"
             
             let getImage = GetCashedImage(url: weather.iconUrl)
             getImage.completionBlock = {
